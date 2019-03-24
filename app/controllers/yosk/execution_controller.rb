@@ -18,7 +18,8 @@ module Yosk
 
 
       command = "cd #{Rails.root} && bundle exec rake \"yosk[#{execution_id}]\""
-      IO.popen(command)
+      pid = spawn(command)
+      Process.detach pid
 
       render json: {execution_id: execution_id}
     end
