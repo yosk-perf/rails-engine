@@ -1,4 +1,4 @@
-class RedisLogger
+class RedisLogger < Logger
 
   attr_reader :execution_id
 
