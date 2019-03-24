@@ -16,11 +16,19 @@ module Yosk
 
       execution_id = Yosk::Execution.start! execution_request
 
+
+      command = "cd #{Rails.root} && bundle exec rake \"yosk[#{execution_id}]\""
+      IO.popen(command)
+
       render json: { execution_id: execution_id }
     end
 
     def status
       render json: Yosk::Execution.status(params.require(:id))
+    end
+
+    def fetch_response
+      render json: Yosk::Execution.fetch_response(params.require(:id), 'response')
     end
   end
 end

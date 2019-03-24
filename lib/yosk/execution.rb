@@ -9,6 +9,18 @@ class Yosk::Execution
     id
   end
 
+  def self.complete!(id)
+    $redis.set "yosk:execution:#{id}:status", { status: "completed" }.to_json
+  end
+
+  def self.write_result id, type, body
+    $redis.set "yosk:execution:#{id}:response:#{type}", body
+  end
+
+  def self.fetch_response id, type
+    $redis.get "yosk:execution:#{id}:response:#{type}"
+  end
+
   def self.find_request(id)
     request = $redis.get "yosk:execution:#{id}:request"
     JSON.parse request
