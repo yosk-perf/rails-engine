@@ -30,5 +30,9 @@ module Yosk
     def fetch_response
       render json: Yosk::Execution.fetch_response(params.require(:id), 'response')
     end
+
+    def details
+      render json: Yosk::Execution.fetch_response(params.require(:id), 'details')
+    end
   end
 end
