@@ -7,6 +7,7 @@ Yosk::Engine.routes.draw do
       get :response, to: 'execution#fetch_response'
       get :details
       get :memory_profiler
+      get :logs
     end
   end
 end

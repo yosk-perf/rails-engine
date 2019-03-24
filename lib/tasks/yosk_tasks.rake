@@ -15,9 +15,10 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
   begin
     execution_request = Yosk::Execution.find_request(args.execution_id)
 
-    Rails.logger = Logger.new(STDOUT)
-    ActiveRecord::Base.logger = Logger.new(STDOUT)
-    # ActiveRecord::Base.establish_connection(:production_read_replica)
+    redis_logger = RedisLogger.new(args.execution_id)
+    Rails.logger = redis_logger
+    ActiveRecord::Base.logger = redis_logger
+    ActiveRecord::Base.establish_connection(:production_read_replica)
 
     controller = build_controller execution_request
 

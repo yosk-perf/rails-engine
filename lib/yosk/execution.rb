@@ -32,4 +32,16 @@ class Yosk::Execution
   def self.status(id)
     $redis.get "yosk:execution:#{id}:status"
   end
+
+  def self.write_log(id, message)
+    return if message.empty?
+
+    $redis.sadd "yosk:execution:#{id}:logs", message.to_json
+  end
+
+  def self.fetch_logs(id)
+    logs = $redis.smembers "yosk:execution:#{id}:logs"
+
+    logs.map {|log| JSON.parse log}
+  end
 end
