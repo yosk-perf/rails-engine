@@ -1,23 +1,26 @@
 class Yosk::Execution
-
   def self.start!(request)
     id = SecureRandom.uuid
 
     $redis.set "yosk:execution:#{id}:request", request.to_json
-    $redis.set "yosk:execution:#{id}:status", { status: "in-progress" }.to_json
+    $redis.set "yosk:execution:#{id}:status", { status: 'in-progress' }.to_json
 
     id
   end
 
   def self.complete!(id)
-    $redis.set "yosk:execution:#{id}:status", { status: "completed" }.to_json
+    $redis.set "yosk:execution:#{id}:status", { status: 'completed' }.to_json
   end
 
-  def self.write_result id, type, body
+  def self.failed!(id, error)
+    $redis.set "yosk:execution:#{id}:status", { status: 'failed', error_message: error.message }.to_json
+  end
+
+  def self.write_result(id, type, body)
     $redis.set "yosk:execution:#{id}:response:#{type}", body
   end
 
-  def self.fetch_response id, type
+  def self.fetch_response(id, type)
     $redis.get "yosk:execution:#{id}:response:#{type}"
   end
 

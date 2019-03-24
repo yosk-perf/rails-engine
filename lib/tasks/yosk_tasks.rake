@@ -22,5 +22,6 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
     Yosk::Execution.complete! args.execution_id
     Yosk::Execution.write_result args.execution_id, 'response', controller.response.body
   rescue StandardError => err
+    Yosk::Execution.failed! args.execution_id, err
   end
 end
