@@ -5,10 +5,10 @@ module Yosk
     def routes
       routes = Rails.application.routes.routes.map(&:defaults)
 
-      routes.map! do |route|
-        next if route[:controller].nil?
+      controllers = routes.map { |c| c[:controller] }.uniq.compact
 
-        controller = "#{route[:controller].camelize}Controller".safe_constantize
+      controllers.map! do |controller|
+        controller = "#{controller.camelize}Controller".safe_constantize
         next if controller.nil?
 
         actions = controller.action_methods.to_a
@@ -22,9 +22,9 @@ module Yosk
         }
       end
 
-      routes.compact!
+      controllers.compact!
 
-      render json: routes
+      render json: controllers
     end
   end
 end
