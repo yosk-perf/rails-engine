@@ -8,19 +8,21 @@ module Yosk
       routes.map! do |route|
         next if route[:controller].nil?
 
+        controller = "#{route[:controller].camelize}Controller".safe_constantize
+        next if controller.nil?
+
+        actions = controller.action_methods.to_a
+        file = controller.instance_method(actions.first.to_sym).source_location[0]
+
+        next unless file.include? Rails.root.join('app').to_s
+
         {
-          controller: "#{route[:controller].camelize}Controller",
-          action: route[:action]
+          controller: controller.name,
+          actions: actions
         }
       end
 
       routes.compact!
-      routes = routes.group_by { |r| r[:controller] }.map do |controller_name, controller_actions|
-        {
-          controller: controller_name,
-          actions: controller_actions.map { |a| a[:action] }
-        }
-      end
 
       render json: routes
     end
