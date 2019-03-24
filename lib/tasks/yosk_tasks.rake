@@ -1,3 +1,5 @@
+require 'memory_profiler'
+
 def build_controller(execution_request)
   controller = execution_request["controller"].constantize.new
   controller.params = ActionController::Parameters.new(execution_request["params"].merge(action: execution_request["action"]))
@@ -24,7 +26,10 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
     event_recorder = Yosk::EventRecorder.new
     event_recorder.start!
 
-    controller.send(execution_request["action"])
+    report = MemoryProfiler.report {
+      controller.send(execution_request["action"])
+    }
+
 
     event_recorder.finish!
     execution_context.complete!
@@ -32,6 +37,10 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
     Yosk::Execution.complete! args.execution_id
     Yosk::Execution.write_result args.execution_id, 'details', event_recorder.results.to_json
     Yosk::Execution.write_result args.execution_id, 'response', controller.response.body
+
+    io = StringIO.new
+    report.pretty_print(io)
+    Yosk::Execution.write_result args.execution_id, 'memory', io.string
   rescue StandardError => err
     Yosk::Execution.failed! args.execution_id, err
   end

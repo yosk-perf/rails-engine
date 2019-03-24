@@ -34,5 +34,9 @@ module Yosk
     def details
       render json: Yosk::Execution.fetch_response(params.require(:id), 'details')
     end
+
+    def memory_profiler
+      render plain: Yosk::Execution.fetch_response(params.require(:id), 'memory')
+    end
   end
 end
