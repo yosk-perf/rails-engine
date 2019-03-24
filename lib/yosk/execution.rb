@@ -1,23 +1,25 @@
 class Yosk::Execution
+  TTL = 1.hours
   def self.start!(request)
     id = SecureRandom.uuid
 
-    $redis.set "yosk:execution:#{id}:request", request.to_json
-    $redis.set "yosk:execution:#{id}:status", { status: 'in-progress' }.to_json
+    $redis.setex "yosk:execution:#{id}:request", TTL, request.to_json
+    $redis.setex "yosk:execution:#{id}:status", TTL, { status: 'in-progress' }.to_json
+
 
     id
   end
 
   def self.complete!(id)
-    $redis.set "yosk:execution:#{id}:status", { status: 'completed' }.to_json
+    $redis.setex "yosk:execution:#{id}:status", TTL, { status: 'completed' }.to_json
   end
 
   def self.failed!(id, error)
-    $redis.set "yosk:execution:#{id}:status", { status: 'failed', error_message: error.message }.to_json
+    $redis.setex "yosk:execution:#{id}:status", TTL, { status: 'failed', error_message: error.message }.to_json
   end
 
   def self.write_result(id, type, body)
-    $redis.set "yosk:execution:#{id}:response:#{type}", body
+    $redis.setex "yosk:execution:#{id}:response:#{type}", TTL, body
   end
 
   def self.fetch_response(id, type)
