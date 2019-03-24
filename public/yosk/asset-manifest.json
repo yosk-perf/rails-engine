@@ -1,15 +1,15 @@
 {
-  "main.css": "/yosk/static/css/main.dbf6ccd7.chunk.css",
-  "main.js": "/yosk/static/js/main.0ebb04c2.chunk.js",
-  "main.js.map": "/yosk/static/js/main.0ebb04c2.chunk.js.map",
+  "main.css": "/yosk/static/css/main.5868cbfd.chunk.css",
+  "main.js": "/yosk/static/js/main.d29ca417.chunk.js",
+  "main.js.map": "/yosk/static/js/main.d29ca417.chunk.js.map",
   "runtime~main.js": "/yosk/static/js/runtime~main.5549d84a.js",
   "runtime~main.js.map": "/yosk/static/js/runtime~main.5549d84a.js.map",
   "static/css/2.14837808.chunk.css": "/yosk/static/css/2.14837808.chunk.css",
-  "static/js/2.b9a7ca11.chunk.js": "/yosk/static/js/2.b9a7ca11.chunk.js",
-  "static/js/2.b9a7ca11.chunk.js.map": "/yosk/static/js/2.b9a7ca11.chunk.js.map",
+  "static/js/2.9f1cdfce.chunk.js": "/yosk/static/js/2.9f1cdfce.chunk.js",
+  "static/js/2.9f1cdfce.chunk.js.map": "/yosk/static/js/2.9f1cdfce.chunk.js.map",
   "index.html": "/yosk/index.html",
-  "precache-manifest.f0a27106dc21d72cb41bd1f69999f225.js": "/yosk/precache-manifest.f0a27106dc21d72cb41bd1f69999f225.js",
+  "precache-manifest.51c6ecf355a04fb7304cbdad4ce833bf.js": "/yosk/precache-manifest.51c6ecf355a04fb7304cbdad4ce833bf.js",
   "service-worker.js": "/yosk/service-worker.js",
   "static/css/2.14837808.chunk.css.map": "/yosk/static/css/2.14837808.chunk.css.map",
-  "static/css/main.dbf6ccd7.chunk.css.map": "/yosk/static/css/main.dbf6ccd7.chunk.css.map"
+  "static/css/main.5868cbfd.chunk.css.map": "/yosk/static/css/main.5868cbfd.chunk.css.map"
 }
