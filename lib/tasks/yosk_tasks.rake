@@ -5,7 +5,7 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
 
     Rails.logger = Logger.new(STDOUT)
     ActiveRecord::Base.logger = Logger.new(STDOUT)
-    ActiveRecord::Base.establish_connection(:production_read_replica)
+    # ActiveRecord::Base.establish_connection(:production_read_replica)
 
     controller = execution_request["controller"].constantize.new
     controller.params = ActionController::Parameters.new(execution_request["params"].merge(action: execution_request["action"]))
