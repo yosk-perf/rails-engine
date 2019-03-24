@@ -9,7 +9,7 @@ module Yosk
         next if route[:controller].nil?
 
         {
-          controller: "#{route[:controller].classify}Controller",
+          controller: "#{route[:controller].camelize}Controller",
           action: route[:action]
         }
       end
