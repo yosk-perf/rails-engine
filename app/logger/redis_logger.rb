@@ -27,6 +27,10 @@ class RedisLogger
     write_to_redis(message)
   end
 
+  def debug?()
+    true
+  end
+
   def debug(message)
     message = {messagePayload: message}
     message["logLevel"] = "debug"
