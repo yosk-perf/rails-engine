@@ -11,7 +11,7 @@ module Yosk
         controller: params[:request_controller],
         action: params[:request_action],
         user_id: params[:user_id],
-        params: params.to_unsafe_h[:params]
+        params: params.to_unsafe_h.fetch(:params, {})
       }
 
       execution_id = Yosk::Execution.start! execution_request
