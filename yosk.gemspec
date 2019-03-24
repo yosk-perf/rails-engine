@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.version     = Yosk::VERSION
   spec.authors     = ["Yosi Attias"]
   spec.email       = ["yosy101@gmail.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of Yosk."
-  spec.description = "TODO: Description of Yosk."
+  spec.homepage    = "http://google.com"
+  spec.summary     = "google.com"
+  spec.description = "google.com"
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -25,7 +25,5 @@ Gem::Specification.new do |spec|
 
   spec.files = Dir["{app,config,db,lib}/**/*", "MIT-LICENSE", "Rakefile", "README.md"]
 
-  spec.add_dependency "rails", "~> 6.0.0.beta3"
-
-  spec.add_development_dependency "sqlite3"
+  spec.add_dependency "rails", "~> 5.2.2"
 end
