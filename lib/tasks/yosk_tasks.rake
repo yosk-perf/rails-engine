@@ -27,21 +27,26 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
     event_recorder = Yosk::EventRecorder.new
     event_recorder.start!
 
+    queries_recorder = Yosk::SqlQueriesRecorder.new
+    queries_recorder.start! args.execution_id
+
     report = MemoryProfiler.report {
       controller.send(execution_request["action"])
     }
 
 
     event_recorder.finish!
+    queries_recorder.finish!
     execution_context.complete!
 
-    Yosk::Execution.complete! args.execution_id
     Yosk::Execution.write_result args.execution_id, 'details', event_recorder.results.to_json
     Yosk::Execution.write_result args.execution_id, 'response', controller.response.body
 
     io = StringIO.new
     report.pretty_print(io)
     Yosk::Execution.write_result args.execution_id, 'memory', io.string
+
+    Yosk::Execution.complete! args.execution_id
   rescue StandardError => err
     Yosk::Execution.failed! args.execution_id, err
   end

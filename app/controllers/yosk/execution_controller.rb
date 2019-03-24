@@ -40,7 +40,11 @@ module Yosk
     end
 
     def logs
-      render json: Yosk::Execution.fetch_logs(params.require(:id))
+      render json: Yosk::Execution.fetch_list(params.require(:id), "logs")
+    end
+
+    def sql_queries
+      render json: Yosk::Execution.fetch_list(params.require(:id), "sql_queries")
     end
   end
 end

@@ -8,6 +8,7 @@ Yosk::Engine.routes.draw do
       get :details
       get :memory_profiler
       get :logs
+      get :sql_queries
     end
   end
 end

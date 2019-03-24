@@ -44,6 +44,6 @@ class RedisLogger
     message["id"] = SecureRandom.uuid
     message["timestamp"] = Time.now
 
-    Yosk::Execution.write_log @execution_id, message
+    Yosk::Execution.append_list @execution_id, "logs", message
   end
 end
