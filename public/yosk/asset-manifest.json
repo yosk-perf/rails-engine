@@ -1,5 +1,5 @@
 {
-  "main.css": "/yosk/static/css/main.5868cbfd.chunk.css",
+  "main.css": "/yosk/static/css/main.b9aba77f.chunk.css",
   "main.js": "/yosk/static/js/main.d29ca417.chunk.js",
   "main.js.map": "/yosk/static/js/main.d29ca417.chunk.js.map",
   "runtime~main.js": "/yosk/static/js/runtime~main.5549d84a.js",
@@ -8,8 +8,8 @@
   "static/js/2.9f1cdfce.chunk.js": "/yosk/static/js/2.9f1cdfce.chunk.js",
   "static/js/2.9f1cdfce.chunk.js.map": "/yosk/static/js/2.9f1cdfce.chunk.js.map",
   "index.html": "/yosk/index.html",
-  "precache-manifest.51c6ecf355a04fb7304cbdad4ce833bf.js": "/yosk/precache-manifest.51c6ecf355a04fb7304cbdad4ce833bf.js",
+  "precache-manifest.80f8a50a0524fc5c5639800b69d70586.js": "/yosk/precache-manifest.80f8a50a0524fc5c5639800b69d70586.js",
   "service-worker.js": "/yosk/service-worker.js",
   "static/css/2.14837808.chunk.css.map": "/yosk/static/css/2.14837808.chunk.css.map",
-  "static/css/main.5868cbfd.chunk.css.map": "/yosk/static/css/main.5868cbfd.chunk.css.map"
+  "static/css/main.b9aba77f.chunk.css.map": "/yosk/static/css/main.b9aba77f.chunk.css.map"
 }

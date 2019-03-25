@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "/yosk/static/js/runtime~main.5549d84a.js"
   },
   {
-    "revision": "70e35cca8dc828c06ccd",
+    "revision": "193971893503d911e566",
     "url": "/yosk/static/js/main.d29ca417.chunk.js"
   },
   {
@@ -12,15 +12,15 @@ self.__precacheManifest = [
     "url": "/yosk/static/js/2.9f1cdfce.chunk.js"
   },
   {
-    "revision": "70e35cca8dc828c06ccd",
-    "url": "/yosk/static/css/main.5868cbfd.chunk.css"
+    "revision": "193971893503d911e566",
+    "url": "/yosk/static/css/main.b9aba77f.chunk.css"
   },
   {
     "revision": "6b9cffe9a506d0e1d5ef",
     "url": "/yosk/static/css/2.14837808.chunk.css"
   },
   {
-    "revision": "c82db39150c116df3464b782568e60d1",
+    "revision": "df0bdbfbb959c2166b778ecd616bd179",
     "url": "/yosk/index.html"
   }
 ];
