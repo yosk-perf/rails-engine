@@ -19,6 +19,7 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
 
     Rails.logger = redis_logger
     ActiveRecord::Base.logger = redis_logger
+    ActiveRecord::Base.verbose_query_logs = true
     ActiveSupport::LogSubscriber.colorize_logging = false
 
     # ActiveRecord::Base.establish_connection(:production_read_replica)
