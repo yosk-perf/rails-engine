@@ -3,8 +3,8 @@ Yosk::Engine.routes.draw do
 
   resources :execution, only: [:create] do
     member do
-      get :request
       get :status
+      get :request, to: 'execution#fetch_request'
       get :response, to: 'execution#fetch_response'
       get :details
       get :memory_profiler

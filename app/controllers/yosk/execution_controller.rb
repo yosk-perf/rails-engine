@@ -24,7 +24,7 @@ module Yosk
       render json: {execution_id: execution_id}
     end
 
-    def request
+    def fetch_request
       render json: Yosk::Execution.find_request(params.require(:id))
     end
 
