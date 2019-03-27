@@ -3,6 +3,7 @@ Yosk::Engine.routes.draw do
 
   resources :execution, only: [:create] do
     member do
+      get :request
       get :status
       get :response, to: 'execution#fetch_response'
       get :details
