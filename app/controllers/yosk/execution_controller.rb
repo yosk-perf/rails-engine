@@ -9,7 +9,7 @@ module Yosk
       execution_request = {
         controller: params[:request_controller],
         action: params[:request_action],
-        user_id: params.permit(:user_id),
+        user_id: params[:user_id],
         params: params.to_unsafe_h.fetch(:params, {})
       }
 
