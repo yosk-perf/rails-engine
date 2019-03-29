@@ -5,7 +5,10 @@ def build_controller(execution_request)
   controller.params = ActionController::Parameters.new(execution_request["params"].merge(action: execution_request["action"]))
   controller.response = ActionDispatch::Response.new
   controller.request = ActionDispatch::TestRequest.create
-  controller.instance_variable_set :@current_user, User.find(execution_request["user_id"])
+
+  if execution_request["user_id"].present?
+    controller.instance_variable_set :@current_user, User.find(execution_request["user_id"])
+  end
 
   controller
 end
