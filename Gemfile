@@ -11,5 +11,14 @@ gemspec
 # Git. Remember to move these dependencies to your gemspec before releasing
 # your gem to rubygems.org.
 
+group :development do
+  gem 'pry-byebug'
+  gem 'pry-rails'
+  gem 'pry-remote'
+  gem 'pry-rescue'
+  gem 'pry-stack_explorer'
+  gem 'rubocop'
+  gem 'redis'
+end
 # To use a debugger
 # gem 'byebug', group: [:development, :test]
