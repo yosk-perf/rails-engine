@@ -5,7 +5,6 @@ class Yosk::SqlQueriesRecorder
       _, start, finish, _, payload = *args
       event = ActiveSupport::Notifications::Event.new *args
 
-
       next if payload.fetch(:sql) == 'COMMIT'
       next if payload.fetch(:sql) == 'SCHEMA'
       next if payload.fetch(:name) == 'SCHEMA'
@@ -16,7 +15,7 @@ class Yosk::SqlQueriesRecorder
         duration: event.duration
       }
 
-      Yosk::Execution.append_list execution_id, "sql_queries", operation 
+      Yosk::Execution.append_list execution_id, 'sql_queries', operation
     end
 
     self

@@ -6,31 +6,31 @@ module Yosk
       render json: controllers
     end
 
-    private 
+    private
 
     def controllers
       @@controllers ||= begin
-        routes = Rails.application.routes.routes.map(&:defaults)
+                          routes = Rails.application.routes.routes.map(&:defaults)
 
-        controllers = routes.map { |c| c[:controller] }.uniq.compact
+                          controllers = routes.map { |c| c[:controller] }.uniq.compact
 
-        app_path = Rails.root.join('app').to_s
-        controllers.map! do |controller|
-          controller = "#{controller.camelize}Controller".safe_constantize
-          next if controller.nil?
+                          app_path = Rails.root.join('app').to_s
+                          controllers.map! do |controller|
+                            controller = "#{controller.camelize}Controller".safe_constantize
+                            next if controller.nil?
 
-          actions = controller.action_methods.to_a
-          file = controller.instance_method(actions.first.to_sym).source_location[0]
+                            actions = controller.action_methods.to_a
+                            file = controller.instance_method(actions.first.to_sym).source_location[0]
 
-          next unless file.include? app_path
+                            next unless file.include? app_path
 
-          {
-            controller: controller.name,
-            actions: actions
-          }
-        end
+                            {
+                              controller: controller.name,
+                              actions: actions
+                            }
+                          end
 
-        controllers.compact!
+                          controllers.compact!
                         end
     end
   end

@@ -1,4 +1,4 @@
-require_dependency "yosk/application_controller"
+require_dependency 'yosk/application_controller'
 
 module Yosk
   class ExecutionController < ApplicationController
@@ -7,20 +7,19 @@ module Yosk
       params.require(:request_action)
 
       execution_request = {
-          controller: params[:request_controller],
-          action: params[:request_action],
-          user_id: params.permit(:user_id),
-          params: params.to_unsafe_h.fetch(:params, {})
+        controller: params[:request_controller],
+        action: params[:request_action],
+        user_id: params.permit(:user_id),
+        params: params.to_unsafe_h.fetch(:params, {})
       }
 
       execution_id = Yosk::Execution.start! execution_request
-
 
       command = "cd #{Rails.root} && bundle exec rake \"yosk[#{execution_id}]\""
       pid = spawn(command)
       Process.detach pid
 
-      render json: {execution_id: execution_id}
+      render json: { execution_id: execution_id }
     end
 
     def fetch_request
@@ -44,11 +43,11 @@ module Yosk
     end
 
     def logs
-      render json: Yosk::Execution.fetch_list(params.require(:id), "logs")
+      render json: Yosk::Execution.fetch_list(params.require(:id), 'logs')
     end
 
     def sql_queries
-      render json: Yosk::Execution.fetch_list(params.require(:id), "sql_queries")
+      render json: Yosk::Execution.fetch_list(params.require(:id), 'sql_queries')
     end
   end
 end
