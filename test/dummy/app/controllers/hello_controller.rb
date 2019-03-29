@@ -3,5 +3,6 @@ class HelloController < ApplicationController
   end
 
   def show
+    Rails.logger.info "log form hello conroller!"
   end
 end

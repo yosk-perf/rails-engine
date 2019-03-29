@@ -13,45 +13,42 @@ def build_controller(execution_request)
   controller
 end
 
+INSTRUMENTATIONS = [
+  Yosk::Instrumentations::ActiveRecordSqlQueries,
+  Yosk::Instrumentations::Runtime,
+  Yosk::Instrumentations::Logs,
+]
+
 desc 'Explaining what the task does'
 task :yosk, [:execution_id] => [:environment] do |task, args|
   begin
     execution_request = Yosk::Execution.find_request(args.execution_id)
 
-    redis_logger = RedisLogger.new(args.execution_id)
+    instrumentations = INSTRUMENTATIONS.map { |klass| klass.new(args.execution_id) }.select(&:enabled?)
 
-    Rails.logger = redis_logger
-    ActiveRecord::Base.logger = redis_logger
-    ActiveRecord::Base.verbose_query_logs = true
-    ActiveSupport::LogSubscriber.colorize_logging = false
-
-    # ActiveRecord::Base.establish_connection(:production_read_replica)
+    instrumentations.each(&:setup)
 
     controller = build_controller execution_request
 
     execution_context = Rails.application.executor.run!
 
-    event_recorder = Yosk::EventRecorder.new
-    event_recorder.start!
-
-    queries_recorder = Yosk::SqlQueriesRecorder.new
-    queries_recorder.start! args.execution_id
+    instrumentations.each(&:before_request)
 
     report = MemoryProfiler.report {
       controller.send(execution_request["action"])
     }
 
+    instrumentations.each(&:after_request)
 
-    event_recorder.finish!
-    queries_recorder.finish!
     execution_context.complete!
 
-    Yosk::Execution.write_result args.execution_id, 'details', event_recorder.results.to_json
     Yosk::Execution.write_result args.execution_id, 'response', controller.response.body
 
     io = StringIO.new
     report.pretty_print(io)
     Yosk::Execution.write_result args.execution_id, 'memory', io.string
+
+    instrumentations.each(&:teardown)
 
     Yosk::Execution.complete! args.execution_id
   rescue StandardError => err
