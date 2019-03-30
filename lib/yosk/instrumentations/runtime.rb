@@ -34,7 +34,6 @@ module Yosk
 
       def teardown; end
 
-
       # Returns the difference in milliseconds between when the execution of the
       # event started and when it ended.
       #

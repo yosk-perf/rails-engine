@@ -1,13 +1,13 @@
 require 'memory_profiler'
 
 def build_controller(execution_request)
-  controller = execution_request["controller"].constantize.new
-  controller.params = ActionController::Parameters.new(execution_request["params"].merge(action: execution_request["action"]))
+  controller = execution_request['controller'].constantize.new
+  controller.params = ActionController::Parameters.new(execution_request['params'].merge(action: execution_request['action']))
   controller.response = ActionDispatch::Response.new
   controller.request = ActionDispatch::TestRequest.create
 
-  if execution_request["user_id"].present?
-    controller.instance_variable_set :@current_user, User.find(execution_request["user_id"])
+  if execution_request['user_id'].present?
+    controller.instance_variable_set :@current_user, User.find(execution_request['user_id'])
   end
 
   controller
@@ -16,12 +16,13 @@ end
 INSTRUMENTATIONS = [
   Yosk::Instrumentations::ActiveRecordSqlQueries,
   Yosk::Instrumentations::Runtime,
-  Yosk::Instrumentations::Logs,
-]
+  Yosk::Instrumentations::Logs
+].freeze
 
 desc 'Explaining what the task does'
-task :yosk, [:execution_id] => [:environment] do |task, args|
+task :yosk, [:execution_id] => [:environment] do |_task, args|
   begin
+    ActiveRecord::Base.establish_connection(:production_read_replica)
     execution_request = Yosk::Execution.find_request(args.execution_id)
 
     instrumentations = INSTRUMENTATIONS.map { |klass| klass.new(args.execution_id) }.select(&:enabled?)
@@ -34,9 +35,9 @@ task :yosk, [:execution_id] => [:environment] do |task, args|
 
     instrumentations.each(&:before_request)
 
-    report = MemoryProfiler.report {
-      controller.send(execution_request["action"])
-    }
+    report = MemoryProfiler.report do
+      controller.send(execution_request['action'])
+    end
 
     instrumentations.each(&:after_request)
 

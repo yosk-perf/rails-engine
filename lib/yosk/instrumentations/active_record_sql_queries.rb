@@ -20,8 +20,8 @@ module Yosk
           next if event.payload.fetch(:name) == 'SCHEMA'
 
           operation = {
-            name: payload.fetch(:name),
-            query: payload.fetch(:sql),
+            name: event.payload.fetch(:name),
+            query: event.payload.fetch(:sql),
             duration: event.duration
           }
 

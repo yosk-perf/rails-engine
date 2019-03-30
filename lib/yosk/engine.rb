@@ -7,8 +7,10 @@ module Yosk
     end
 
     initializer 'after_initialize' do
-      # TODO: remove once we add config block on main app
-      Yosk::Configuraiton.redis = $redis if defined?($redis)
+      Yosk.config do |cfg|
+        # TODO: remove once we add config block on main app
+        cfg.redis = $redis if defined?($redis)
+      end
     end
   end
 end
