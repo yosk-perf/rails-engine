@@ -13,4 +13,3 @@ require 'yosk/sql_queries_recorder'
 require 'yosk/instrumentations/active_record_sql_queries'
 require 'yosk/instrumentations/runtime'
 require 'yosk/instrumentations/logs'
-

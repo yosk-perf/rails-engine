@@ -3,7 +3,9 @@ module Yosk
     isolate_namespace Yosk
 
     initializer 'static assets' do |app|
-      app.middleware.use ::ActionDispatch::Static, "#{root}/public"
+      app.middleware.use ::ActionDispatch::Static, "#{root}/public", headers: {
+        'Cache-Control' => 'immutable'
+      }
     end
 
     initializer 'after_initialize' do
