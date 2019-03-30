@@ -25,7 +25,7 @@ module Yosk
             duration: event.duration
           }
 
-          Yosk::Execution.append_list execution_id, 'sql_queries', operation
+          Yosk::Execution.append_list @execution_id, 'sql_queries', operation
         end
       end
 
