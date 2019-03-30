@@ -22,7 +22,8 @@ INSTRUMENTATIONS = [
 desc 'Explaining what the task does'
 task :yosk, [:execution_id] => [:environment] do |_task, args|
   begin
-    ActiveRecord::Base.establish_connection(:production_read_replica)
+    execution_context = Rails.application.executor.run!
+
     execution_request = Yosk::Execution.find_request(args.execution_id)
 
     instrumentations = INSTRUMENTATIONS.map { |klass| klass.new(args.execution_id) }.select(&:enabled?)
@@ -30,8 +31,6 @@ task :yosk, [:execution_id] => [:environment] do |_task, args|
     instrumentations.each(&:setup)
 
     controller = build_controller execution_request
-
-    execution_context = Rails.application.executor.run!
 
     instrumentations.each(&:before_request)
 
