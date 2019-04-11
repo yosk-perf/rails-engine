@@ -1,6 +1,9 @@
 import React from 'react';
 import { Table } from 'antd';
-import Hightlight from 'react-highlight.js';
+
+import BareHighlight from 'react-fast-highlight/lib/BareHighlight';
+import hljs from 'highlight.js/lib/highlight';
+hljs.registerLanguage('sql', require('highlight.js/lib/languages/sql'));
 
 const columns = [
     {
@@ -18,11 +21,11 @@ const columns = [
         render: query => {
             return (
                 <div>
-                    <Hightlight language="SQL">
-                        <pre style={{whiteSpace: 'pre-line', fontFamily: "'Inconsolata', monospace", fontSize: 14}}>
+                    <pre style={{whiteSpace: 'pre-line', fontFamily: "'Inconsolata', monospace", fontSize: 14}}>
+                        <BareHighlight highlightjs={hljs} languages={['sql']} >
                             {query}
-                        </pre>
-                    </Hightlight>
+                        </BareHighlight>
+                    </pre>
                 </div>
             )
         }
