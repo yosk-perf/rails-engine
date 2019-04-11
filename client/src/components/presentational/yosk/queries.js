@@ -10,7 +10,7 @@ class Queries extends React.Component {
         const {yosk} = this.props.yosksStore;
         const queries = yosk.queries;
 
-        return queries.length ?
+        return queries !== null ?
             <div>
                 {<QueriesTable data={queries}/>}
             </div>

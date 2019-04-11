@@ -18,9 +18,9 @@ export const YOSK_STATUS = {
 
 export default class Yosk {
     @observable details;
-    @observable logs = [];
+    @observable logs = null;
     @observable memoryProfiler;
-    @observable queries = [];
+    @observable queries = null;
     @observable status;
     @observable response;
     @observable request;

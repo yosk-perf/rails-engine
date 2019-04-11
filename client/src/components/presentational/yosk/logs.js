@@ -10,7 +10,7 @@ class Logs extends React.Component {
         const {yosk} = this.props.yosksStore;
         const logs = yosk.logs;
 
-        return logs.length ?
+        return logs !== null ?
             <LogTable data={logs}/>
             : <Skeleton active={true}/>
     }
