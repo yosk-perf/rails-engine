@@ -25,7 +25,7 @@ module Yosk
         @allocation_count_finish = now_allocations
 
         results = {
-          total_duration: 1000.0 * (@end - @time),
+          total_duration: (@end - @time),
           allocations_count: @allocation_count_finish - @allocation_count_start
         }
 
@@ -50,7 +50,7 @@ module Yosk
       private
 
       def now
-        Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        Process.clock_gettime(Process::CLOCK_MONOTONIC, :float_millisecond)
       end
 
       if defined?(JRUBY_VERSION)

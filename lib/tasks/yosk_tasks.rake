@@ -15,7 +15,6 @@ end
 
 INSTRUMENTATIONS = [
   Yosk::Instrumentations::ActiveRecordSqlQueries,
-  Yosk::Instrumentations::Runtime,
   Yosk::Instrumentations::Logs
 ].freeze
 
@@ -27,15 +26,19 @@ task :yosk, [:execution_id] => [:environment] do |_task, args|
     execution_request = Yosk::Execution.find_request(args.execution_id)
 
     instrumentations = INSTRUMENTATIONS.map { |klass| klass.new(args.execution_id) }.select(&:enabled?)
+    runtime = Yosk::Instrumentations::Runtime.new(args.execution_id)
 
     instrumentations.each(&:setup)
+    runtime.setup
 
     controller = build_controller execution_request
 
     instrumentations.each(&:before_request)
 
     report = MemoryProfiler.report do
+      runtime.before_request
       controller.send(execution_request['action'])
+      runtime.after_request
     end
 
     instrumentations.each(&:after_request)
@@ -48,6 +51,7 @@ task :yosk, [:execution_id] => [:environment] do |_task, args|
     report.pretty_print(io)
     Yosk::Execution.write_result args.execution_id, 'memory', io.string
 
+    runtime.teardown
     instrumentations.each(&:teardown)
 
     Yosk::Execution.complete! args.execution_id
