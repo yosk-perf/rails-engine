@@ -1,0 +1,17 @@
+.Yosk-form {
+    position: absolute; /* or absolute */
+    top: 50%;
+    left: 50%;
+    margin-top: -100px;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    max-height: 600px;
+    min-width: 500px;
+    min-height: 500px;
+}
+
+.input-padding {
+    margin: 15px 0;
+}
+
+

@@ -1,0 +1,26 @@
+.Result {
+    height: 100%;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.79);
+}
+
+.UpperLayout {
+    height: 48%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.LowerLayout {
+    height: 48%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.MemoryProfiler {
+    overflow: auto;
+}
+
+.MemoryProfiler-text {
+    font-family: 'Inconsolata', monospace;
+    font-size: 14px;
+}

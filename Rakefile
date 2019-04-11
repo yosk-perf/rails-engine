@@ -29,4 +29,12 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = false
 end
 
+task :build_client do
+  `cd client/ && npm i`
+  `cd client/ && rm -rf client/build`
+  `cd client/ && PUBLIC_URL="/yosk" npm run build`
+end
+
+
+task release: [:build_client]
 task default: :test

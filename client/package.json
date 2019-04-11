@@ -1,0 +1,45 @@
+{
+  "name": "yosk",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^3.15.2",
+    "axios": "^0.18.0",
+    "classnames": "^2.2.6",
+    "lodash": "^4.17.11",
+    "material-ui": "^0.20.2",
+    "mobx": "^5.9.0",
+    "mobx-react": "^5.4.3",
+    "mobx-router": "0.0.20",
+    "navigo": "^7.1.2",
+    "prop-types": "^15.7.2",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-highlight.js": "^1.0.7",
+    "react-json-editor-ajrm": "^2.5.9",
+    "react-monaco-editor": "^0.25.1",
+    "react-particles-js": "^2.5.1",
+    "react-scripts": "2.1.8",
+    "uuid4": "^1.1.4"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@babel/plugin-proposal-decorators": "^7.4.0",
+    "customize-cra": "^0.2.12",
+    "react-app-rewired": "^2.1.1"
+  }
+}
