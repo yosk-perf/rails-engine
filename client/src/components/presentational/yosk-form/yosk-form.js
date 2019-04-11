@@ -49,7 +49,7 @@ createYosk = () => {
         request_controller: this.state.selectedYosk.controller,
         request_action: this.state.selectedAction,
         user_id: this.state.userId,
-        params: JSON.parse(this.state.params)
+        params: this.state.params
     });
 };
 
