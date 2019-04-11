@@ -66,7 +66,7 @@ export default class Yosk {
                 duration: 99999999
             });
             setTimeout(() => {
-                window.location.reload();
+                window.location.href = '/yosk';
             }, 5000);
         }
 
