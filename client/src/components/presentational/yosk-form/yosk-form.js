@@ -17,7 +17,7 @@ state = {
     selectedYosk: null,
     selectedAction: '',
     userId: null,
-    params: '{}'
+    params: {}
 };
 
 handleSearch = (value, type) => {
