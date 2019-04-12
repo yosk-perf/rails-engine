@@ -13,6 +13,7 @@ gemspec
 
 group :development do
   gem 'pry-byebug'
+  gem 'pry'
   gem 'pry-rails'
   gem 'pry-remote'
   gem 'pry-rescue'

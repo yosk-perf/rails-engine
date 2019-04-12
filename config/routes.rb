@@ -21,7 +21,7 @@ class StaticResponder
 
   def file_handler
     @file_handler ||= ::ActionDispatch::FileHandler.new(
-      Yosk::Engine.root.join('client').join('build').to_s
+      Yosk::Engine.root.join('public').join('yosk').to_s
     )
   end
 end

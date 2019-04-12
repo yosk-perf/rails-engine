@@ -33,6 +33,9 @@ task :build_client do
   `cd client/ && npm i`
   `cd client/ && rm -rf client/build`
   `cd client/ && PUBLIC_URL="/yosk" npm run build`
+  `rm -rf public/yosk`
+	`mkdir -p public/yosk`
+	`mv client/build/* public/yosk`
 end
 
 

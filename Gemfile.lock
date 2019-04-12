@@ -163,6 +163,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  pry
   pry-byebug
   pry-rails
   pry-remote
