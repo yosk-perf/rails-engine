@@ -35,7 +35,7 @@ task :yosk, [:execution_id] => [:environment] do |_task, args|
 
     instrumentations.each(&:before_request)
 
-    report = MemoryProfiler.report do
+    report = MemoryProfiler.report(ignore_files: /yosk/) do
       runtime.before_request
       controller.send(execution_request['action'])
       runtime.after_request
