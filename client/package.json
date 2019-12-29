@@ -20,7 +20,7 @@
     "react-fast-highlight": "2.2.2",
     "react-json-editor-ajrm": "2.5.9",
     "react-particles-js": "2.7.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.3.0",
     "source-map-explorer": "1.8.0",
     "uuid4": "1.1.4"
   },
